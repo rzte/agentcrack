@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Main-Class: com.rzte.agentcrack.Hack
+Premain-Class: com.rzte.agentcrack.Hack
+Agent-Class: com.rzte.agentcrack.Hack
+Can-Redefine-Classes: true
+Can-Retransform-Classes: true

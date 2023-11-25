@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Main-Class: com.rzte.agentcrack.Monitor
+Premain-Class: com.rzte.agentcrack.Monitor
+Agent-Class: com.rzte.agentcrack.Monitor
+Can-Redefine-Classes: true
+Can-Retransform-Classes: true
