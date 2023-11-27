@@ -1,7 +1,8 @@
 # crack java agent
 
-不落地文件，不借助 `VM.attach` 而实现的 `Agent` 型内存马。
+不落地文件，不借助 `VM.attach` 而实现的 `Agent` 型内存马。技术细节: [Agent 内存马的攻防之道](https://xz.aliyun.com/t/13110#toc-0)。
 
+注意：本项目仅做学习研究使用，不保证其稳定性及可靠性。本项目不应该在生产环境下使用，也不应该用于任何非法或不道德的目的。使用本项目的人应严格遵守相关的法律法规，对自己的行为负责。
 
 ## app
 
@@ -63,13 +64,9 @@ java -jar javaagent.jar <target_pid> redefine/retransform
 java -cp ${workdir}/app/target/app-1.0-SNAPSHOT.jar:${workdir}/memshell-demo/ com.rzte.agentcrack.App  AgentX
 ```
 
-## memshell
-
-根据 `memshell-demo` 而实现的，相对“实际”的 `jsp` 内存马。由于 `jsp` 中修改类字节码比较复杂，这里借助下面的 `memshell-server` 来修改 。
-
 ## memshell-server
 
-与 `memshell` 配合，负责初始化内存马。
+与下面的 `memshell` 配合，负责初始化内存马。
 
 ```bash
 java -cp ${workdir}/memshell-server/target/memshell-server-1.0-SNAPSHOT-jar-with-dependencies.jar com.rzte.agentcrack.App
@@ -85,3 +82,20 @@ java -cp ${workdir}/memshell-server/target/memshell-server-1.0-SNAPSHOT-jar-with
 ![memshell-ls](pic/memshell-ls.png)
 
 ![memshell-whoami](pic/memshell-whoami.png)
+
+
+## memshell
+
+根据 `memshell-demo` 而实现的，相对“实际”的 `jsp` 内存马。由于 `jsp` 中修改类字节码比较复杂，这里借助 `memshell-server` 来修改 。
+
+### NoAgent.jsp
+
+无需落地文件，借助已有的 agent 实施攻击:
+
+![NoAgent](./pic/NoAgent.gif)
+
+### AgentX.jsp
+
+无需落地文件，也不借助已有的 agent 实施攻击，且基本上无法被基于 `java agent` 技术而实现的防护措施所检测到（目前仅适配了 64 位的 jdk8 ）。
+
+![AgentX](./pic/AgentX.gif)
